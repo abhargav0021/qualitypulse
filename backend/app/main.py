@@ -22,7 +22,11 @@ from backend.app.services import QualityService
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 FRONTEND_DIR = PROJECT_ROOT / "frontend"
-DEFAULT_DB_PATH = PROJECT_ROOT / "backend" / "qualitypulse.db"
+DEFAULT_DB_PATH = (
+    Path("/tmp/qualitypulse.db")
+    if os.getenv("VERCEL")
+    else PROJECT_ROOT / "backend" / "qualitypulse.db"
+)
 
 
 def create_app(database_path: str | Path | None = None, seed_data: bool = True) -> FastAPI:
@@ -99,4 +103,3 @@ def create_app(database_path: str | Path | None = None, seed_data: bool = True) 
 
 
 app = create_app()
-
