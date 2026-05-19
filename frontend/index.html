@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QualityPulse</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Quality Engineering Dashboard</p>
+        <h1>QualityPulse</h1>
+      </div>
+      <a class="docs-link" href="/docs">API Docs</a>
+    </header>
+
+    <main>
+      <section class="metrics" aria-label="Quality metrics">
+        <article class="metric">
+          <span>Release Readiness</span>
+          <strong id="releaseScore">--</strong>
+        </article>
+        <article class="metric">
+          <span>Automation Coverage</span>
+          <strong id="coverage">--</strong>
+        </article>
+        <article class="metric">
+          <span>Active Defects</span>
+          <strong id="activeDefects">--</strong>
+        </article>
+        <article class="metric">
+          <span>Modules</span>
+          <strong id="modules">--</strong>
+        </article>
+      </section>
+
+      <section class="workspace">
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Test Cases</h2>
+            <span id="testCount">0 total</span>
+          </div>
+          <form id="testForm" class="entry-form">
+            <input name="title" placeholder="Test title" minlength="4" required />
+            <div class="form-grid">
+              <input name="module" placeholder="Module" minlength="2" required />
+              <input name="owner" placeholder="Owner" minlength="2" required />
+            </div>
+            <div class="form-grid">
+              <select name="priority">
+                <option value="medium">Medium priority</option>
+                <option value="high">High priority</option>
+                <option value="low">Low priority</option>
+              </select>
+              <label class="checkline">
+                <input name="automated" type="checkbox" />
+                Automated
+              </label>
+            </div>
+            <textarea
+              name="expected_result"
+              placeholder="Expected result"
+              minlength="8"
+              required
+            ></textarea>
+            <button type="submit">Add Test Case</button>
+          </form>
+          <div id="testCases" class="list"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Defects</h2>
+            <span id="defectCount">0 total</span>
+          </div>
+          <form id="defectForm" class="entry-form">
+            <input name="title" placeholder="Defect title" minlength="4" required />
+            <div class="form-grid">
+              <select name="severity">
+                <option value="major">Major severity</option>
+                <option value="critical">Critical severity</option>
+                <option value="minor">Minor severity</option>
+              </select>
+              <select name="linked_test_case_id" id="linkedTestCase">
+                <option value="">No linked test</option>
+              </select>
+            </div>
+            <button type="submit">Log Defect</button>
+          </form>
+          <div id="defects" class="list"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
+
